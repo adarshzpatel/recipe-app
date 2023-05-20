@@ -36,8 +36,10 @@ const Input = ({ type, label, className, id, disabled,placeholder, ...props }: I
             file:bg-transparent
             file:text-sm
             file:font-medium
+            focus:ring 
+            focus:ring-gray-100
             focus-visible:outline-none
-            focus-visible:border-gray-500
+            focus-visible:border-gray-400
             disabled:cursor-not-allowedß
             disabled:opacity-50
             ${className}`

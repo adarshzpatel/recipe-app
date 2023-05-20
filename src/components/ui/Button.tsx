@@ -1,9 +1,10 @@
 import { IconType } from "react-icons";
+import Loader from "./Loader";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   loading?: boolean;
-  loadingText?: string
+  loadingText?:string
   disabled?: boolean;
   icon?: IconType;
   className?: string;
@@ -14,7 +15,7 @@ const Button = ({ text, loading,loadingText, disabled,className, icon: Icon,...p
     <button
       disabled={disabled || loading}
       className={`
-        ${Icon && "flex items-center justify-center gap-3"}
+        flex items-center justify-center gap-3
         font-medium
         text-white
         bg-rose-500
@@ -26,12 +27,16 @@ const Button = ({ text, loading,loadingText, disabled,className, icon: Icon,...p
         focus:outline-none
         focus:ring
         focus:ring-rose-200
+        disabled:pointer-events-none
+        disabled:opacity-70
         ${className}
       `}
       {...props}
     >
-      {Icon && <Icon size={20} />}
-      <span className="whitespace-nowrap">{(loading && loadingText ) ? loadingText : text }</span>
+      {Icon  && !loading && <Icon size={20}   />}
+      {loading ? <Loader col='white' /> :  <span className="whitespace-nowrap "> {text }</span>}
+      
+      
     </button>
   );
 };
