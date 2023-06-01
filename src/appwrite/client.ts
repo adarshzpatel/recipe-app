@@ -7,6 +7,7 @@ export const DATABASE_ID = "6466a59081c5386778f5"
 export const RECIPE_COLLECTION_ID = "6466a5bac373814fc38f"
 export const USER_COLLECTION_ID = "6471ee2cc65650bae83f"
 
+
 const appwriteClient = new Client()
   .setEndpoint(API_ENDPOINT)
   .setProject(PROJECT_ID);

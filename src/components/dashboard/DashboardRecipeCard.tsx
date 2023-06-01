@@ -1,6 +1,7 @@
 import { FiEdit, FiEye } from "react-icons/fi";
-import { Recipe } from "../contexts/RecipesContext";
+
 import { Link, useNavigate } from "react-router-dom";
+import { Recipe } from "../../pages/ExploreRecipesPage";
 
 interface Props {
   data: Recipe;

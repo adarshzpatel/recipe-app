@@ -1,6 +1,7 @@
 
-import { Recipe } from "../contexts/RecipesContext"
+
 import { Link } from "react-router-dom"
+import { Recipe } from "../../pages/ExploreRecipesPage"
 
 interface Props {
   

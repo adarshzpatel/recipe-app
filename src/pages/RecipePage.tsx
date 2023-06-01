@@ -15,7 +15,7 @@ import Tag from "../components/ui/Tag";
 const RecipePage = () => {
   const { recipeId } = useParams();
   const [data, setData] = useState<Recipe>();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
     if (recipeId) {

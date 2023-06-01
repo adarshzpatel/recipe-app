@@ -10,7 +10,6 @@ import RecipePage from "./pages/RecipePage.tsx";
 import CreateNewRecipePage from "./pages/CreateNewRecipePage.tsx";
 import { UserProvider } from "./components/contexts/UserContext.tsx";
 import { Toaster } from "react-hot-toast";
-import { RecipeProvider } from "./components/contexts/RecipesContext.tsx";
 import { DashboardPage } from "./pages/DashboardPage.tsx";
 import EditRecipePage from "./pages/EditRecipe.tsx";
 
