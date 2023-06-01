@@ -16,18 +16,20 @@ const IngredientInput = ({handleAdd}: Props) => {
   })
 
   return (
-    <div className="flex flex-wrap gap-4">
-      <Input onChange={(e)=>setState({...state,name:e.target.value})} placeholder="Name" className="w-80" />
-      <Input onChange={(e)=>setState({...state,quantity:e.target.value})} placeholder="Quantity" />
-      <Input onChange={(e)=>setState({...state,unit:e.target.value})} placeholder="Unit" />
+    <div className="flex gap-4 flex-wrap md:flex-nowrap">
+      <Input onChange={(e)=>setState({...state,name:e.target.value})} value={state.name} placeholder="Name" className="flex-1 sm:w-72" />
+      <Input onChange={(e)=>setState({...state,quantity:e.target.value})} value={state.quantity} placeholder="Quantity" className=""/>
+      <Input onChange={(e)=>setState({...state,unit:e.target.value})} value={state.unit} placeholder="Unit" className=""/>
       <Button 
         onClick={()=>{
+          if(!state.name || !state.quantity || !state.unit) return
           handleAdd(state.name,state.quantity,state.unit)
           setState({name:"",quantity:"",unit:""})
         }}
         type="button" 
         text="Add Ingredient"
-        icon={FiPlus} 
+        icon={FiPlus}
+        variant="secondary" 
       />
     </div>
   );

@@ -9,6 +9,10 @@ import ExploreRecipesPage from "./pages/ExploreRecipesPage.tsx";
 import RecipePage from "./pages/RecipePage.tsx";
 import CreateNewRecipePage from "./pages/CreateNewRecipePage.tsx";
 import { UserProvider } from "./components/contexts/UserContext.tsx";
+import { Toaster } from "react-hot-toast";
+import { RecipeProvider } from "./components/contexts/RecipesContext.tsx";
+import { DashboardPage } from "./pages/DashboardPage.tsx";
+import EditRecipePage from "./pages/EditRecipe.tsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +36,14 @@ const router = createBrowserRouter([
     element: <RecipePage />,
   },
   {
+    path: "/dashboard",
+    element: <DashboardPage />,
+  },
+  {
+    path: "/edit/:recipeId",
+    element: <EditRecipePage />,
+  },
+  {
     path: "/create",
     element: <CreateNewRecipePage />,
   },
@@ -39,6 +51,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
+    <Toaster position="top-center" />
     <UserProvider>
       <RouterProvider router={router} />
     </UserProvider>

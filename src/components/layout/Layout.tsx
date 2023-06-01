@@ -6,15 +6,15 @@ interface Props {
   className?: string
 }
 
-const Layout = ({ children,className }: Props) => {
+const Layout = ({ children, className }: Props) => {
   return (
     <div>
       <Navbar />
-      <main className={`container mx-auto min-h-[calc(100vh-8rem)] ${className} px-4 sm:px-0 py-4`}>
+      <main className={`container max-w-screen-lg mx-auto min-h-[calc(100vh-8rem)]  p-4 ${className}`}>
         {children}
       </main>
     </div>
   )
 }
- 
+
 export default Layout

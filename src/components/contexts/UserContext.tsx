@@ -1,25 +1,33 @@
 import React, { createContext, useEffect, useState } from "react";
-import { account } from "../../libs/appwrite";
-
+import { DATABASE_ID, USER_COLLECTION_ID, account, database } from "../../appwrite/client";
+import { toast } from "react-hot-toast";
+import { Models } from "appwrite";
 // Here we get the type of response we get from the account.get promise
-type User = Awaited<ReturnType<typeof account.get>> | null;
+
+export interface User extends Models.Document {
+  name:string 
+  accountId:string
+  recipes:string 
+  saved:string 
+}
 
 export interface IUserContext {
-  user:User 
-  loading:boolean 
-  getCurrentUser: ()=> void
-  logout: ()=> void
+  user:User | null 
+  loading: boolean
+  getCurrentUser: () => void
+  logout: () => void
 }
+
 export const UserContext = createContext<IUserContext>({
-  user:null,
-  loading:true,
-  getCurrentUser:()=> {return},
-  logout:()=>{return}
+  user : null,
+  loading: true,
+  getCurrentUser: () => { return },
+  logout: () => { return }
 });
 
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   const [loading, setLoading] = useState(true);
 
@@ -27,25 +35,30 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     getCurrentUser();
   }, []);
 
-  const getCurrentUser = () => {
+  const getCurrentUser = async () => {
     setLoading(true);
-    if(!user){
-      account
-      .get()
-      .then((response) => {
-        console.log("user", response);
-        setUser(response);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false));
+    try{
+      const user = await account?.get()
+      if(user){
+        const userDetails = await database.getDocument(DATABASE_ID,USER_COLLECTION_ID,user?.$id)
+        setUser(userDetails as User)
+      }
+    }catch(err:any){
+      console.log(err)
+    }finally{
+      setLoading(false)
     }
   };
 
   const logout = () => {
     account
       .deleteSessions()
-      .then(() => console.log("Logged out successfully"))
-      .catch((err) => console.log(err));
+      .then(() => {
+        setUser(null)
+        toast("You have been logged out!")
+        window.location.reload()
+      })
+      .catch((err) => toast.error(err.message));
   };
 
   return (

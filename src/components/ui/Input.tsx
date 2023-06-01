@@ -5,14 +5,15 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id?: string
   disabled?: boolean
   placeholder?:string
+  required?:boolean
 }
 
-const Input = ({ type, label, className, id, disabled,placeholder, ...props }: InputProps) => {
+const Input = ({ required,type, label, className, id, disabled,placeholder, ...props }: InputProps) => {
   return (
-    <div className="block">
+    <div className="w-full">
       {label &&
         <label id={id} htmlFor={id} className="text-gray-600 block mb-1">
-          {label}
+          {label}{required && <span className="text-red-500"> *</span>}
         </label>
       }
       <input
@@ -30,7 +31,6 @@ const Input = ({ type, label, className, id, disabled,placeholder, ...props }: I
             px-4
             py-2
             bg-white
-            text-sm
             ring-offset-background
             file:border-0
             file:bg-transparent
